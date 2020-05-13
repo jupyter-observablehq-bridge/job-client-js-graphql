@@ -1,0 +1,18 @@
+mutation(
+  $channel: String!
+  $name: String!
+  $value: String
+  $add_histo: Boolean
+  $expiry: Int
+) {
+  publishWrite(
+    channel: $channel
+    name: $name
+    value: $value
+    add_histo: $add_histo
+    expiry: $expiry
+  ) {
+    channel
+    name
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "@oscar6echo/job-client-graphql",
+  "version": "1.0.0",
+  "description": "graphql client for jupyter-observablehq-bridge",
+  "homepage": "https://github.com/jupyter-observablehq-bridge/job-client-js-graphql",
+  "author": "oscar6echo",
+  "license": "MIT",
+  "private": false,
+  "browser": "distBrowser/index.js",
+  "module": "distNode/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint src/*.js",
+    "clean": "rm -rf distB && rm -rf dist",
+    "dev": "NODE_ENV_WP=development webpack-dev-server --config webpack.config.js",
+    "build": "yarn clean && NODE_ENV_WP=production webpack --config webpack.config.js",
+    "test-module-qm": "node -r esm test/module/sample-query-mutation.js",
+    "test-bundle-qm": "node -r esm test/bundle/sample-query-mutation.js",
+    "test-module-su": "node -r esm test/module/sample-subscription.js",
+    "test-bundle-su": "node -r esm test/bundle/sample-subscription.js",
+    "test-browser": "cp distB/index.js test/browser/index.js && cd test/browser && serve ."
+  },
+  "dependencies": {
+    "apollo-boost": "^0.4.8",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.9",
+    "apollo-link": "^1.2.14",
+    "apollo-link-ws": "^1.0.20",
+    "esm": "^3.2.25",
+    "graphql": "^14.6.0",
+    "node-fetch": "^2.6.0",
+    "subscriptions-transport-ws": "^0.9.16",
+    "ws": "^7.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "prettier": "^2.0.5",
+    "raw-loader": "^4.0.1",
+    "serve": "^11.3.0",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.7.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

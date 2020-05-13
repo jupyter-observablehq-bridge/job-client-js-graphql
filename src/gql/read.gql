@@ -1,0 +1,6 @@
+query($channel: String!, $name: String!) {
+  read(channel: $channel, name: $name) {
+    name
+    value
+  }
+}

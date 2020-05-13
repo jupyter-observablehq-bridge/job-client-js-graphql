@@ -1,0 +1,6 @@
+mutation($channel: String!, $name: String!, $value: String) {
+  publish(channel: $channel, name: $name, value: $value) {
+    channel
+    name
+  }
+}

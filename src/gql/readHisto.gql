@@ -1,0 +1,6 @@
+query($channel: String!, $name: String!, $start: Int!, $end: Int!) {
+  readHisto(channel: $channel, name: $name, start: $start, end: $end) {
+    value
+    timestamp
+  }
+}

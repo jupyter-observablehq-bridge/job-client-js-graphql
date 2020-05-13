@@ -1,0 +1,6 @@
+subscription($channel: String!, $pattern: Boolean) {
+  subscribe(channel: $channel, pattern: $pattern) {
+    name
+    value
+  }
+}

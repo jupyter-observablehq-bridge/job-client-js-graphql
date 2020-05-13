@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <h3>
+      Test page
+    </h3>
+    open console
+  </body>
+
+  <script>
+    console.log('start');
+
+    const b = jupyterBridge;
+    console.log('module jupyterBride loaded, accessible as b');
+    console.log(b);
+
+    // WARNING CLIENT BOOST DOES NOT WORK WITH SUBSCRIPTIONS
+    const clientA = b.buildClient();
+    // console.log({ clientA });
+
+    const variablesQ = { channel: 'channel-1', name: 'toto' };
+    console.log('\n--- variables query\n');
+    console.log(JSON.stringify(variablesQ));
+
+    const variablesH = {
+      channel: 'channel-1',
+      name: 'toto',
+      n: 10,
+      start: 0
+    };
+    console.log('\n--- variables query histo\n');
+    console.log(JSON.stringify(variablesH));
+
+    const variablesM1 = {
+      channel: 'channel-1',
+      name: 'toto',
+      value: 123,
+      add_histo: true,
+      expiry: 30
+    };
+    const variablesM2 = {
+      channel: 'channel-1',
+      name: 'titi',
+      value: 'azerty'
+    };
+    const variablesM3 = {
+      channel: 'channel-1',
+      name: 'toto',
+      value: JSON.stringify({ a: 22, b: 'abc', c: { d: { f: 'def' } } }),
+      add_histo: false,
+      expiry: null
+    };
+    console.log('\n--- variables mutation\n');
+    console.log(JSON.stringify(variablesM1));
+    console.log(JSON.stringify(variablesM2));
+
+    const runQM = async () => {
+      const optsQ = { fetchPolicy: 'network-only' };
+      const optsM = { fetchPolicy: 'no-cache' };
+
+      const resAQ = await b.actions.read({
+        client: clientA,
+        variables: variablesQ,
+        raw: false,
+        opts: optsQ
+      });
+
+      const resAH = await b.actions.readHisto({
+        client: clientA,
+        variables: variablesH,
+        raw: false,
+        opts: optsQ
+      });
+
+      const resAM1 = await b.actions.write({
+        client: clientA,
+        variables: variablesM1,
+        raw: false,
+        opts: optsM
+      });
+      const resAM2 = await b.actions.publish({
+        client: clientA,
+        variables: variablesM2,
+        raw: false,
+        opts: optsM
+      });
+      const resAM3 = await b.actions.publishWrite({
+        client: clientA,
+        variables: variablesM3,
+        raw: false,
+        opts: optsM
+      });
+
+      console.log('\n--- requests sent\n');
+      console.log('*'.repeat(50));
+
+      console.log('\n--- awnswer read');
+      console.log(resAQ);
+
+      console.log('\n--- awnswer read histo');
+      console.log(JSON.stringify(resAH, null, 2));
+
+      console.log('\n--- awnswer write');
+      console.log(resAM1);
+      console.log('\n--- awnswer publish');
+      console.log(resAM2);
+      console.log('\n--- awnswer publishWrite');
+      console.log(resAM3);
+    };
+
+    runQM();
+
+    const variablesS = { channel: 'channel-1', pattern: true };
+    console.log('\n--- subscription\n');
+    console.log(JSON.stringify(variablesS));
+
+    const runS = async () => {
+      const subscription = b.actions.subscribe({
+        client: clientA,
+        variables: variablesS,
+        raw: true,
+        observer: {
+          next: (data) => {
+            const sep = '-->';
+            console.log(`${sep} data:\n${JSON.stringify(data, null, 2)}`);
+          },
+          error: (error) => {
+            const sep = '*'.repeat(50);
+            console.log(`\n${sep}\nsubscription error:\n${error}`);
+          },
+          complete: () => {
+            const sep = '*'.repeat(50);
+            console.log(`\n${sep}\nsubscription complete\n`);
+          }
+        }
+      });
+
+      console.log('\n--- subscription done\n');
+      console.log('*'.repeat(50));
+
+      window.setTimeout(() => subscription.unsubscribe(), 4000);
+      const timer = window.setInterval(() => console.log('--- TIC ---'), 1000);
+      window.setTimeout(() => window.clearInterval(timer), 4000);
+    };
+
+    runS();
+
+    console.log('done');
+  </script>
+</html>
