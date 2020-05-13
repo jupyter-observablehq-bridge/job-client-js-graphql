@@ -2,7 +2,7 @@
 
 ## Overview
 
-See documentation in [jupyter-observablehq-notebook](TBD)
+See [documentation](TBD).
 
 JavaScript package Node and Browser.  
 
