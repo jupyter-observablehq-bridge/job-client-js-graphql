@@ -4,7 +4,10 @@
       <v-spacer></v-spacer>
       <v-toolbar-title>Test JupyterBridge JS Client</v-toolbar-title>
       <v-spacer></v-spacer>
-      <a href="https://github.com/oscar6echo/TBD" target="_blank">
+      <a
+        href="https://github.com/jupyter-observablehq-bridge/job-client-js-graphql/tree/master/test/demo-page"
+        target="_blank"
+      >
         <v-icon>mdi-github-circle</v-icon>
       </a>
     </v-app-bar>
