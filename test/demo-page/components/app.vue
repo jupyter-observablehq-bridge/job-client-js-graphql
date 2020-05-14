@@ -70,7 +70,7 @@ module.exports = {
   data() {
     return {
       host: "localhost",
-      port: "4000",
+      port: "4001",
       path: "/graphql"
     };
   },

@@ -14,6 +14,7 @@ yarn sim2
 
 ```bash
 # copy bridge.js from distB/
+# in forder test/demo-page/
 cp ../../distB/index.js bridge.js
 ```
 
