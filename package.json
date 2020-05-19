@@ -1,6 +1,6 @@
 {
   "name": "@oscar6echo/job-client-graphql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "graphql client for jupyter-observablehq-bridge",
   "homepage": "https://github.com/jupyter-observablehq-bridge/job-client-js-graphql",
   "author": "oscar6echo",

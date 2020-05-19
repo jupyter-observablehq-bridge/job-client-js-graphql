@@ -2,7 +2,7 @@
 
 ## Overview
 
-See [documentation](TBD).
+See [documentation](https://observablehq.com/@oscar6echo/jupyter-observablehq-bridge).
 
 JavaScript package Node and Browser.  
 
